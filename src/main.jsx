@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <h1>Meu Editor de Markdown</h1>
-      <SolanisMDE width="600px" height="400px" initialMarkdown="# Olá Mundo!" />
+      <SolanisMDE />
     </div>
   );
 }

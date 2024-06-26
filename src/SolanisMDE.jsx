@@ -1,32 +1,47 @@
-/* eslint-disable react/no-children-prop */
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import CodeMirror from '@uiw/react-codemirror';
-import Markdown from 'react-markdown';
+import SimpleMDE from 'simplemde';
+import 'simplemde/dist/simplemde.min.css';
 import './SolanisMDE.css';
 
 const SolanisMDE = ({ width, height, initialMarkdown }) => {
   const [markdown, setMarkdown] = useState(initialMarkdown || '# Bem-vindo ao Solanis MDE!');
+  const editorRef = useRef(null);
+  const editorInstanceRef = useRef(null);
 
-  const handleMarkdownChange = (editor, value) => {
-    setMarkdown(value);
-  };
+  useEffect(() => {
+    if (editorRef.current) {
+      const editorInstance = new SimpleMDE({
+        element: editorRef.current,
+        initialValue: markdown,
+        spellChecker: false,
+        autosave: {
+          enabled: true,
+          uniqueId: 'SolanisMDE',
+          delay: 1000,
+        },
+      });
+
+      editorInstance.codemirror.on('change', () => {
+        setMarkdown(editorInstance.value());
+      });
+
+      editorInstanceRef.current = editorInstance;
+    }
+
+    return () => {
+      if (editorInstanceRef.current) {
+        editorInstanceRef.current.toTextArea();
+        editorInstanceRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <div className="solanis-mde" style={{ width: width || '100%', height: height || '100vh' }}>
-      <div className="editor">
-        <CodeMirror
-          value={markdown}
-          options={{
-            mode: 'markdown',
-            theme: 'material',
-            lineNumbers: true,
-          }}
-          onChange={(editor) => handleMarkdownChange(editor, editor.getValue())}
-        />
-      </div>
+      <textarea ref={editorRef} />
       <div className="preview">
-        <Markdown children={markdown} />
+        <div dangerouslySetInnerHTML={{ __html: editorInstanceRef.current?.options.previewRender(markdown) }} />
       </div>
     </div>
   );

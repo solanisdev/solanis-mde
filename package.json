@@ -4,8 +4,9 @@
   "description": "Meu Editor de Markdown personalizado",
   "main": "dist/index.js",
   "scripts": {
-    "build": "react-scripts build",
-    "start": "react-scripts start"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "keywords": [
     "markdown",
@@ -15,9 +16,14 @@
   "author": "gustavorteuber",
   "license": "MIT",
   "dependencies": {
-    "@uiw/react-codemirror": "^6.0.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "easymde": "^2.18.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-refresh": "^0.14.2",
+    "react-scripts": "^5.0.1",
+    "simplemde": "^1.11.2",
+    "vite": "^5.3.1"
   },
   "peerDependencies": {
     "react": "^17.0.2",
@@ -27,5 +33,17 @@
     "@babel/core": "^7.14.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.29.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
