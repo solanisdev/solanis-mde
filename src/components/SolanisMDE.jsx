@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import SimpleMDE from 'simplemde';
 import 'simplemde/dist/simplemde.min.css';
-import './SolanisMDE.css';
 
 const SolanisMDE = ({ width, height, initialMarkdown }) => {
   const [markdown, setMarkdown] = useState(initialMarkdown || '# Bem-vindo ao Solanis MDE!');

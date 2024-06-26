@@ -1,5 +1,4 @@
-import SolanisMDE from './SolanisMDE';
-import './SolanisMDE.css';
+import SolanisMDE from './components/SolanisMDE';
 
 function App() {
   return (
